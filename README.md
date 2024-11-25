@@ -1,25 +1,89 @@
-# game-demo
+ ScreamGane
 
-Scream Game
+[Click here to see deployed game](http://github.com)
 
-How the Game Works:
-Objective: The player must survive while avoiding the masked killer. The player will make decisions such as where to hide to evade danger.
-Clues: Players find clues along the way that can help them decide to avoid danger. These clues might be text-based (e.g., "The door is locked, find the key!") or visual indicators (e.g., a flashing light or open window).
-Ending/Win Condition: The player wins by escaping the killer. If they make the wrong decision or fail to act in time, they lose on the third live since he has 3 (hearts)
-Losing Condition: If the killer catches the player, the game ends, and the player can try again.
+## Description
 
-How to Play: Simple instructions:
-Use the arrow keys to move.
-Press "Enter" to select choices or actions.
-Avoid the killer’s traps and make it to safety.
+The main objective of the game is to protect yourself from killers, grab weapons 🔪 that will be thrown from the sky and use them to kill 6 assassins.
 
-Win/Loss Conditions:
-Win by surviving and escaping the killer.
-Lose if the killer catches you.
+## MVP
 
-Start: The game begins with a simple prompt and a short introduction (e.g., "You're in a spooky house. The killer is close. What do you do?").
-First Decision: The player is presented with their first set of clues. For example:
-Clue 1: "You hear footsteps behind you. Do you hide in the closet or run upstairs?"
-Decision: The player must choose between hiding or running.
-Right Decision: Hiding in the closet will keep the player safe.
-Wrong Decision: Running upstairs leads to the killer’s location and results in losing a heart.
+_Implement basic controls to allow the victim to move left and right._
+_Create a system that spawns weapons and shields falling from the top of the screen at regular intervals._
+_Set a 10-second time limit for the player to collect these items before they disappear._
+_Implement a system that allows the player to use collected weapons to "kill" killers._
+_Create a weapon bar that increases as the player collects weapons, allowing them to use them for 5 seconds to eliminate killers._
+_Implement a shield system that can be activated for 5 seconds after collection, protecting against attacks._
+_Create a health bar that can withstand up to 6 knife damage and 3 direct damage from killers._
+_Include a scoring system that tracks when a killer is eliminated._
+_Set a victory condition for when the player eliminates 6 killers._
+_Provide visual feedback to players about the health bar, available weapons, and shield usage._
+
+## Backlog
+
+_Add difficulty levels that increase the speed and number of enemies._
+_Introduce new types of weapons and shields with different effects._
+_Special items that grant temporary abilities._
+_Add background music and sound effects for weapons and collectibles._
+_End-of-game screen with statistics such as time played, number of items collected, among others._
+
+## Data structure
+
+Class 'Player':
+
+_Attributes:_
+_position: Current position of the player (left/right)._
+_lifeBar: Amount of life remaining._
+_weaponBar: Time available for using the weapon._
+
+_Methods:_
+_move(direction): Move the character left or right._
+_collect(item): Collect and activate an item from the sky._
+_hit(type): Reduce health based on the type of hit received._
+
+Class 'Enemy':
+
+_Attributes:_
+_position: Current position on the screen._
+_type: Type of enemy (assassin or knife)._
+
+_Methods:_
+_move(): Move the enemy towards the character._
+_attack(player): Perform an attack against the player._
+
+Class 'Item':
+
+_Attributes:_
+_position: Current position on the screen._
+_type: Type of item (weapon or shield)._
+
+_Methods:_
+_fall(): Make the item fall towards the character._
+
+Class 'Game':
+
+_Attributes:_
+_score: Player's current score._
+_enemies: List of active enemies._
+_items: List of current dropping items._
+
+_Methods:_
+_start(): Start the game._
+_update(): Update the game state (player/enemy movement, item collection, etc.)_
+_checkVictory(): Check if the player has met the victory conditions._
+
+## States y States Transitions
+
+_Start Screen_
+_Game Screen_
+_Game Over Screm_
+
+## Task
+
+_1. Create Basic HTML/CSS Structure: Static game interface._
+_2. Implement Character Movement: Controls to move the player._
+_3. Item Dropping and Collection System: Logic for items dropping and being picked up._
+_4. Enemy Confrontation Logic: Implement basic enemy interactions with the player._
+_5. State and Health Management: Implement health bar and updates as damage is received/dealt._
+_6. Implement State Transitions: Create logic to change between states such as Menu (start scream), Game (game scream), Game Over (scream)._
+_7. Final Adjustments and Testing: Refactor the code, fix bugs and optimize the game experience._
