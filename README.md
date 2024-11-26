@@ -90,7 +90,7 @@ _7. Final Adjustments and Testing: Refactor the code, fix bugs and optimize the 
 
 ## Links
 
-- [GitHub Project](https://github.com/users/MrsLondon/projects/2/views/1)
+- [GitHub Project]()
 - [Slides Link](http://slides.com)
 - [Github repository Link](http://github.com)
 - [Deployment Link](http://github.com)
