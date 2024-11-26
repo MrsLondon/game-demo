@@ -1,4 +1,4 @@
- ScreamGane
+ScreamGane
 
 [Click here to see deployed game](http://github.com)
 
@@ -87,3 +87,10 @@ _4. Enemy Confrontation Logic: Implement basic enemy interactions with the playe
 _5. State and Health Management: Implement health bar and updates as damage is received/dealt._
 _6. Implement State Transitions: Create logic to change between states such as Menu (start scream), Game (game scream), Game Over (scream)._
 _7. Final Adjustments and Testing: Refactor the code, fix bugs and optimize the game experience._
+
+## Links
+
+- [GitHub Project](https://github.com/users/MrsLondon/projects/2/views/1)
+- [Slides Link](http://slides.com)
+- [Github repository Link](http://github.com)
+- [Deployment Link](http://github.com)
