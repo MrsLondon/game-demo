@@ -24,3 +24,4 @@ class Item {
         ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
     }
 
+}
