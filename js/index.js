@@ -59,4 +59,24 @@ document.addEventListener("DOMContentLoaded", () => {
       localStorage.setItem("highestScore", newHighestScore);
       displayHighestScore.textContent = `Highest Score: ${newHighestScore}`;
     };
+
+    window.onload = () => {
+        // Display only splash screen
+        startGameScreen.style.display = "flex";
+        mainGameScreen.style.display = "none";
+        gameOverScreen.style.display = "none";
+        canvas.style.display = "none";
+    
+        // Play start screen music on button click
+        musicBtn.addEventListener('click', playSoundOnStartScreen);
+    
+        // When start game btn click, hide splash screen and go to main game screen
+        startGameBtn.forEach(item => {
+            item.addEventListener('click', event => {
+                resetGame();
+                updateGame();
+            });
+        });
+    };
+    
 });
