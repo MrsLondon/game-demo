@@ -2,18 +2,24 @@ class Player {
     constructor(canvasWidth, canvasHeight) {
         this.x = canvasWidth / 2; // Start at the center of the canvas
         this.y = canvasHeight - 100; // Position at the bottom
-        this.width = 50;
-        this.height = 50;
+        this.width = 300; // Desired width for player
+        this.height = 300; // Desired height for player
         this.lifeBar = 6; // Health can withstand 6 knife hits
         this.weaponBar = 0; // Initially no weapons
         this.isShieldActive = false; // No shield at start
         this.isWeaponActive = false; // Weapon isn't active at start
-        this.shieldDuration = 0; // Shield lasts for 5 seconds
-        this.weaponDuration = 0; // Weapon lasts for 5 seconds
+        this.shieldDuration = 0; // Shield lasts 5 seconds
+        this.weaponDuration = 0; // Weapon lasts 5 seconds
 
         // Load images for player
         this.image = new Image();
-        this.image.src = 'assets/images/player.png'; // Replace with actual image source
+        this.image.src = '../images/player.png'; // Replace with actual image source
+
+        // Ensure the image is loaded before drawing
+        this.image.onload = () => {
+            this.imageLoaded = true; // Flag to check if image is loaded
+        };
+        this.imageLoaded = false; // Initially false
     }
 
     // Move the player left or right based on user input
@@ -68,6 +74,38 @@ class Player {
 
     // Draw player on the canvas
     draw(ctx) {
-        ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
+        if (this.imageLoaded) {
+            ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
+        } else {
+            // Optionally, display a placeholder or message while the image loads
+            ctx.fillStyle = "black";
+            ctx.fillText("Loading player image...", this.x, this.y);
+        }
     }
+    
 }
+
+// Create the canvas and context
+const canvas = document.getElementById('gameCanvas');
+const ctx = canvas.getContext('2d');
+
+// Create a new player
+const player = new Player(canvas.width, canvas.height);
+
+// Game loop to update and draw the player
+function gameLoop() {
+    // Clear the canvas
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Update player status (e.g., shield and weapon duration)
+    player.update();
+
+    // Draw the player on the canvas
+    player.draw(ctx);
+
+    // Repeat the game loop
+    requestAnimationFrame(gameLoop);
+}
+
+// Start the game loop
+gameLoop();
