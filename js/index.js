@@ -9,6 +9,14 @@ document.addEventListener("DOMContentLoaded", () => {
     const startGameBtn = document.querySelector("#start-button"); // Corrected ID
     const musicBtn = document.querySelector("#music-toggle"); // Corrected ID
   
+
+
+    document.getElementById('start-button').addEventListener('click', function() {
+        document.getElementById('start-screen').style.display = 'none';
+        const gameScreen = document.getElementById('game-screen');
+        gameScreen.style.display = 'block';
+    });
+    
     // Create an instance of the Game class
     const game = new Game(
       canvas,
