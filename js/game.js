@@ -16,23 +16,32 @@ class Game {
         this.enemies = [];
         this.items = [];
         this.isGameOver = false;
-        this.timer = 10; // Timer for collecting items
 
-        // Start music and sound effects
+        // Audio for background music
         this.themeAudio = new Audio('assets/music/theme.mp3');
-        this.themeAudio.play();
 
-        // Bind event listeners for controls
+        // Bind event listeners
         document.addEventListener('keydown', (e) => this.handleKeyPress(e));
+        this.startGameBtn.addEventListener('click', () => this.start());
     }
 
     
 
     // Start the game
     start() {
+        this.isGameOver = false;
+        this.score = 0;
+        this.enemies = [];
+        this.items = [];
+
         this.startScreen.style.display = 'none';
         this.gameScreen.style.display = 'block';
         this.gameOverScreen.style.display = 'none';
+
+        // Start music (ensure autoplay restrictions are respected)
+        this.themeAudio.currentTime = 0;
+        this.themeAudio.play().catch((err) => console.warn("Audio autoplay prevented:", err));
+
         this.gameLoop();
     }
 
@@ -47,65 +56,81 @@ class Game {
 
     // Update game state
     update() {
-        this.player.update(); // Update player status (e.g., deactivate shield)
-        
-        // Create enemies and items at intervals
+        this.player.update(); // Update player status (e.g., deactivate shield if active)
+
+        // Generate enemies and items at random intervals
         if (Math.random() < 0.02) this.enemies.push(new Enemy('killer', this.canvas.width));
         if (Math.random() < 0.02) this.enemies.push(new Enemy('knife', this.canvas.width));
         if (Math.random() < 0.03) this.items.push(new Item('weapon', this.canvas.width));
         if (Math.random() < 0.03) this.items.push(new Item('shield', this.canvas.width));
 
-        // Move enemies and check for attacks
-        this.enemies.forEach(enemy => {
+        // Move enemies and check for player damage
+        this.enemies.forEach((enemy, index) => {
             enemy.move();
-            enemy.attack(this.player);
-        });
 
-        // Move items and check for collection
-        this.items.forEach(item => {
-            item.fall();
-            if (this.player.x < item.x + item.width && this.player.x + this.player.width > item.x && this.player.y < item.y + item.height && this.player.y + this.player.height > item.y) {
-                // Player collects the item
-                this.player.collect(item);
+            // Check for collision with player
+            if (enemy.collidesWith(this.player)) {
+                enemy.attack(this.player);
+
+                // Remove enemy if it's a knife after hitting the player
+                if (enemy.type === 'knife') this.enemies.splice(index, 1);
             }
         });
 
-        // Check for victory or defeat
+        // Move items and check for player collection
+        this.items.forEach((item, index) => {
+            item.fall();
+
+            // Check if player collects the item
+            if (item.collidesWith(this.player)) {
+                this.player.collect(item);
+                this.items.splice(index, 1); // Remove collected item
+            }
+        });
+
+        // End game if player's life bar reaches zero
         if (this.player.lifeBar <= 0) {
             this.gameOver();
         }
     }
 
-    // Draw game elements on the screen
+    // Draw game elements
     draw() {
-        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height); // Clear the canvas
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height); // Clear canvas
         this.player.draw(this.ctx);
 
-        // Draw enemies and items
-        this.enemies.forEach(enemy => enemy.draw(this.ctx));
-        this.items.forEach(item => item.draw(this.ctx));
+        // Draw enemies
+        this.enemies.forEach((enemy) => enemy.draw(this.ctx));
 
-        // Display score and health
-        this.ctx.fillStyle = 'white';
-        this.ctx.font = '20px Arial';
-        this.ctx.fillText(`Score: ${this.score}`, 20, 30);
-        this.ctx.fillText(`Health: ${this.player.lifeBar}`, 20, 50);
+        // Draw items
+        this.items.forEach((item) => item.draw(this.ctx));
     }
 
-    // End the game (game over)
+    // Main game loop
+    gameLoop() {
+        if (this.isGameOver) return;
+
+        this.update(); // Update game state
+        this.draw(); // Draw elements
+
+        requestAnimationFrame(() => this.gameLoop()); // Repeat the loop
+    }
+
+    // End the game
     gameOver() {
         this.isGameOver = true;
-        this.gameOverScreen.style.display = 'block';
-        this.displayFinalScore.textContent = `Final Score: ${this.score}`;
-        this.themeAudio.pause();
-    }
 
-    // Game loop
-    gameLoop() {
-        if (!this.isGameOver) {
-            this.update();
-            this.draw();
-            requestAnimationFrame(() => this.gameLoop());
-        }
+        // Stop music
+        this.themeAudio.pause();
+
+        // Show game over screen
+        this.gameScreen.style.display = 'none';
+        this.gameOverScreen.style.display = 'block';
+
+        // Display final score and save the highest score
+        this.displayFinalScore.innerText = `Final Score: ${this.score}`;
+        const highestScore = Math.max(this.score, localStorage.getItem('highestScore') || 0);
+        localStorage.setItem('highestScore', highestScore);
+        this.displayHighestScore.innerText = `Highest Score: ${highestScore}`;
     }
 }
