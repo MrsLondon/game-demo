@@ -134,3 +134,10 @@ class Game {
         this.displayHighestScore.innerText = `Highest Score: ${highestScore}`;
     }
 }
+const canvas = document.getElementById('gameCanvas');
+canvas.width = window.innerWidth; // Set canvas width to window width
+canvas.height = window.innerHeight; // Set canvas height to window height
+window.addEventListener('resize', () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+});
