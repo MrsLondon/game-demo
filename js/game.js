@@ -26,6 +26,8 @@ class Game {
         document.addEventListener('keydown', (e) => this.handleKeyPress(e));
     }
 
+    
+
     // Start the game
     start() {
         this.startScreen.style.display = 'none';
