@@ -25,6 +25,8 @@ class Game {
         this.startGameBtn.addEventListener('click', () => this.start());
     }
 
+    
+
     // Start the game
     start() {
         this.isGameOver = false;
