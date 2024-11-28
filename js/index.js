@@ -70,8 +70,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     window.onload = () => {
         // Display only splash screen
-        startGameScreen.style.display = "flex";
-        mainGameScreen.style.display = "none";
+        gameScreen.style.display = "flex";
+        startScreen.style.display = "none";
         gameOverScreen.style.display = "none";
         canvas.style.display = "none";
     

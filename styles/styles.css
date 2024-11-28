@@ -62,35 +62,25 @@ body {
 }
 
 
-/* Player, Enemies, Items */
-#player {
-  position: absolute;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 50px;
-  height: 100px;
-  background-color: #3498db;
-}
 
-#enemies {
+/*#enemies {
   position: absolute;
   top: 20px;
   left: 50%;
   transform: translateX(-50%);
   width: 200px;
   height: 100px;
-  background-color: red;
-}
+  background-color: rgb(71, 62, 62);
+}*/
 
-#items {
+/*#items {
   position: absolute;
   top: 20px;
   right: 20px;
   width: 50px;
   height: 50px;
-  background-color: green;
-}
+  background-color: rgb(74, 75, 74);
+}*/
 
 /* Heads-Up Display (HUD) */
 #hud {
