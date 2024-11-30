@@ -23,9 +23,10 @@ class Player {
 
     moveRight(canvasWidth) {
         if (this.xPosition + this.width < canvasWidth) {
-            this.direction = "right";
+            this.direction = "arrow-right";
             this.image.src = './images/player-right.png'; // Update image
             this.xPosition += 6; // Move player to the right
+
         }
     }
 
@@ -101,7 +102,7 @@ class Player {
     }
 }
 
-// Create the canvas and context
+/* Create the canvas and context
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
 
@@ -129,3 +130,4 @@ function gameLoop() {
 
 // Start the game loop
 gameLoop();
+*/
