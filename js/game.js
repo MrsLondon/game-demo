@@ -11,7 +11,7 @@ class Game {
         this.musicBtn = musicBtn;
 
         this.score = 0;
-        this.player = new Player(canvas.width, canvas.height);
+        this.player = new Player(0, 300);
         this.enemies = [];
         this.items = [];
         this.isGameOver = false;
@@ -32,7 +32,7 @@ class Game {
     start() {
         this.isGameOver = false;
         this.score = 0;
-        this.enemies = [];
+        this.killer = [];
         this.items = [];
 
         this.startScreen.style.display = 'none';
@@ -49,11 +49,12 @@ class Game {
     // Handle keyboard inputs for player movement
     handleKeyPress(e) {
         if (e.key === 'ArrowLeft') {
-            this.player.move('left');
+            this.player.moveLeft();
         } else if (e.key === 'ArrowRight') {
-            this.player.move('right');
+            this.player.moveRight(this.canvas.width);
         }
-    }
+        }
+
 
     // Update game state
     update() {
@@ -101,21 +102,35 @@ class Game {
         this.player.draw(this.ctx);
 
         // Draw enemies
-        this.enemies.forEach((enemy) => enemy.draw(this.ctx));
+       //this.enemies.forEach((enemy) => enemy.draw(this.ctx));
 
         // Draw items
-        this.items.forEach((item) => item.draw(this.ctx));
+        //this.items.forEach((item) => item.draw(this.ctx));
     }
 
     // Main game loop
+    
+    
     gameLoop() {
-        if (this.isGameOver) return;
 
-        this.update(); // Update game state
-        this.draw(); // Draw elements
-
-        requestAnimationFrame(() => this.gameLoop()); // Repeat the loop
-    }
+            if (this.isGameOver) return;
+        
+            // Clear the canvas
+            this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        
+            // Update player status (e.g., shield and weapon duration)
+            this.player.update();
+        
+            // Draw the player on the canvas
+            this.player.draw(this.ctx);
+        
+            // Update health and power bars
+            this.player.updateHealthBar(this.ctx);
+            this.splayer.updatePowerBar(this.ctx);
+        
+            // Repeat the game loop
+            requestAnimationFrame(gameLoop);
+        }
 
     // End the game
     gameOver() {
@@ -141,4 +156,5 @@ canvas.height = window.innerHeight; // Set canvas height to window height
 window.addEventListener('resize', () => {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
+    
 });

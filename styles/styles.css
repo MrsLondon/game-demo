@@ -31,6 +31,22 @@ body {
   max-width: 600px;
 }
 
+
+#game-screen {
+  height: 100vh; /* Full viewport height */
+  width: 100%; /* Full width */
+  display: flex; /* To maintain alignment if necessary */
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: url("../images/dark-night.avif");
+  background-size: cover; /* Ensure the image covers the entire area */
+  margin: 0; /* Remove any default margins */
+  padding: 0; /* Remove any default paddings */
+  box-sizing: border-box; /* Ensure padding doesn't affect dimensions */
+}
+
+/*
 .controls {
   position: fixed;
   left: 50%; 
@@ -56,7 +72,7 @@ body {
   margin-right: 5px;
 }
 
-
+*/
 
 #start-button {
   padding: 10px 20px;
@@ -74,19 +90,7 @@ body {
 }
 
 /* Game Screen */
-#game-screen {
-  height: 100vh; /* Full viewport height */
-  width: 100%; /* Full width */
-  display: flex; /* To maintain alignment if necessary */
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background: url("../images/dark-night.avif") no-repeat center center;
-  background-size: cover; /* Ensure the image covers the entire area */
-  margin: 0; /* Remove any default margins */
-  padding: 0; /* Remove any default paddings */
-  box-sizing: border-box; /* Ensure padding doesn't affect dimensions */
-}
+
 
 
 
