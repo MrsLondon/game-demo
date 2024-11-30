@@ -1,90 +1,50 @@
-document.addEventListener("DOMContentLoaded", () => {
-    // Select the HTML elements
-    const canvas = document.querySelector("#gameCanvas");
-    const startScreen = document.querySelector("#start-screen");
-    const gameScreen = document.querySelector("#game-screen");
-    const gameOverScreen = document.querySelector("#game-over");
-    const displayFinalScore = document.querySelector("#finalScore");
-    const displayHighestScore = document.querySelector("#highestScore");
-    const startGameBtn = document.querySelector("#start-button"); // Corrected ID
-    const musicBtn = document.querySelector("#music-toggle"); // Corrected ID
-  
+// Select HTML elements
+const startScreen = document.getElementById('start-screen');
+const gameScreen = document.getElementById('main-game-container');
+const gameOverScreen = document.getElementById('game-over-container');
+const startButton = document.getElementById('start-button');
+const restartButton = document.getElementById('restart-button');
+const scoreElement = document.getElementById('score');
+const highScoreElement = document.getElementById('highscore');
 
-
-    document.getElementById('start-button').addEventListener('click', function() {
-        document.getElementById('start-screen').style.display = 'none';
-        const gameScreen = document.getElementById('game-screen');
-        gameScreen.style.display = 'block';
-    });
-    
-    // Create an instance of the Game class
-    const game = new Game(
-      canvas,
-      startScreen,
-      gameScreen,
-      gameOverScreen,
-      displayFinalScore,
-      displayHighestScore,
-      startGameBtn,
-      musicBtn
-    );
-
-    // Event listener for the Start Game button
-    startGameBtn.addEventListener("click", () => {
-      game.start();
-    });
-  
-    // Event listener for the Music toggle button
-    musicBtn.addEventListener("click", () => {
-      if (game.themeAudio.paused) {
-        game.themeAudio.play();
-        musicBtn.innerText = "Mute Music";
-      } else {
-        game.themeAudio.pause();
-        musicBtn.innerText = "Play Music";
-      }
-    });
-  
-    // Handle restarting the game
-    document.querySelector("#restart-button").addEventListener("click", () => { // Corrected ID
-      game.score = 0; // Reset score
-      game.player = new Player(canvas.width, canvas.height); // Create a new player instance
-      game.enemies = []; // Clear enemies
-      game.items = []; // Clear items
-      game.isGameOver = false; // Reset game-over state
-      game.start(); // Restart the game
-    });
-  
-    // Display the highest score on page load (if saved in localStorage)
-    const highestScore = localStorage.getItem("highestScore") || 0;
-    displayHighestScore.textContent = `Highest Score: ${highestScore}`;
-  
-    // Override the game over method to save the highest score
-    const originalGameOver = game.gameOver.bind(game);
-    game.gameOver = function () {
-      originalGameOver();
-      const newHighestScore = Math.max(this.score, highestScore);
-      localStorage.setItem("highestScore", newHighestScore);
-      displayHighestScore.textContent = `Highest Score: ${newHighestScore}`;
-    };
-
-    window.onload = () => {
-        // Display only splash screen
-        gameScreen.style.display = "flex";
-        startScreen.style.display = "none";
-        gameOverScreen.style.display = "none";
-        canvas.style.display = "none";
-    
-        // Play start screen music on button click
-        musicBtn.addEventListener('click', playSoundOnStartScreen);
-    
-        // When start game btn click, hide splash screen and go to main game screen
-        startGameBtn.forEach(item => {
-            item.addEventListener('click', event => {
-                resetGame();
-                updateGame();
-            });
-        });
-    };
-    
+// Show Game Screen when Start button is clicked
+startButton.addEventListener('click', () => {
+    startScreen.style.display = 'none'; // Hide start screen
+    gameScreen.style.display = 'block'; // Show the game screen
+    startGame(); // Call your game-start function
 });
+
+// Show Start Screen when Restart button is clicked
+restartButton.addEventListener('click', () => {
+    gameOverScreen.style.display = 'none'; // Hide the game over screen
+    startScreen.style.display = 'block'; // Show the start screen again
+    resetGame(); // Call your reset game function (reset score, etc.)
+});
+
+// Function to show Game Over Screen
+function showGameOver(score) {
+    gameScreen.style.display = 'none'; // Hide the game screen
+    gameOverScreen.style.display = 'block'; // Show the game over screen
+    scoreElement.textContent = score; // Update the score in the game over screen
+    // Optionally, update high score here if needed
+    // highScoreElement.textContent = getHighScore(); 
+}
+
+// Example function to start the game
+function startGame() {
+    // Initialize game state: reset player position, enemies, score, etc.
+    console.log("Game Started");
+    // Start game loop here (e.g., using requestAnimationFrame or setInterval)
+}
+
+// Example function to reset the game
+function resetGame() {
+    // Reset the game state: reset score, player position, etc.
+    console.log("Game Reset");
+    scoreElement.textContent = '000000'; // Reset score
+    // Reset any other game states or variables
+}
+
+// Example of calling showGameOver at some point in your game (for demo)
+// You can replace this with actual game over detection logic
+// showGameOver(100); // Call this function when the game ends with the final score

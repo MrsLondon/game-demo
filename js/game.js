@@ -17,8 +17,10 @@ class Game {
         this.items = [];
         this.isGameOver = false;
 
+
+          
         // Audio for background music
-        this.themeAudio = new Audio('assets/music/theme.mp3');
+        this.themeAudio = new Audio('../music/theme.mp3');
 
         // Bind event listeners
         document.addEventListener('keydown', (e) => this.handleKeyPress(e));

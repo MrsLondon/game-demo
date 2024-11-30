@@ -8,9 +8,9 @@ class Item {
         this.image = new Image();
         
         if (type === 'health') {
-            this.image.src = 'assets/images/health-item.png';
+            this.image.src = '../images/';
         } else if (type === 'power-up') {
-            this.image.src = 'assets/images/power-up-item.png';
+            this.image.src = '../images/';
         }
     }
 
