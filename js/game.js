@@ -10,7 +10,6 @@ class Game {
         this.startGameBtn = startGameBtn;
         this.musicBtn = musicBtn;
 
-        // Game variables
         this.score = 0;
         this.player = new Player(canvas.width, canvas.height);
         this.enemies = [];
@@ -29,7 +28,7 @@ class Game {
 
     
 
-    // Start the game
+
     start() {
         this.isGameOver = false;
         this.score = 0;
