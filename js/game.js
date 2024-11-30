@@ -10,15 +10,16 @@ class Game {
         this.startGameBtn = startGameBtn;
         this.musicBtn = musicBtn;
 
-        // Game variables
         this.score = 0;
         this.player = new Player(canvas.width, canvas.height);
         this.enemies = [];
         this.items = [];
         this.isGameOver = false;
 
+
+          
         // Audio for background music
-        this.themeAudio = new Audio('assets/music/theme.mp3');
+        this.themeAudio = new Audio('../music/theme.mp3');
 
         // Bind event listeners
         document.addEventListener('keydown', (e) => this.handleKeyPress(e));
@@ -27,7 +28,7 @@ class Game {
 
     
 
-    // Start the game
+
     start() {
         this.isGameOver = false;
         this.score = 0;

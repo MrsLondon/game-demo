@@ -9,15 +9,15 @@ body {
   color: white;
 }
 
-/* Start Screen */
 #start-screen {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start; /* Align content to the top */
   height: 100vh;
   text-align: center;
   background: rgba(0, 0, 0, 0.6); /* Slightly darken the background */
+  padding-top: 30%; /* Move the content down 30% from the top */
 }
 
 #start-screen h1 {
@@ -30,6 +30,33 @@ body {
   margin-bottom: 30px;
   max-width: 600px;
 }
+
+.controls {
+  position: fixed;
+  left: 50%; 
+  bottom: 5%; 
+  transform: translateX(-50%); 
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  color: white;
+  font-family: VpPixel;
+  text-align: center;
+}
+
+.controls img {
+  width: 15%; 
+  margin-bottom: 1px; 
+  margin-left: 5px;
+}
+
+.controls p {
+  font-size: 0.8em; 
+  margin-top: 3px; 
+  margin-right: 5px;
+}
+
+
 
 #start-button {
   padding: 10px 20px;
@@ -143,3 +170,18 @@ body {
 #restart-button:hover {
   background-color: #c0392b;
 }
+
+#music-btn {
+  position: fixed;
+  top: 0;
+  right: 0;
+  background: #02354899;
+  border: none;
+  padding: 1em;
+}
+
+#music-btn > img {
+  width: 80px;
+}
+
+
